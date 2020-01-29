@@ -10,3 +10,13 @@
     height: 100%;
     fill: black;
 }
+
+.cycle-item text {
+    font-size: 32;
+    font-family: System-Regular;
+    font-weight: regular;
+    /* text-indent: 32; */
+    fill: black;
+    x: 100%-30;
+    text-anchor: end;
+}
