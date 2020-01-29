@@ -1,0 +1,23 @@
+<svg>
+  <rect id="background" />
+  <svg id="startButton">
+    <use id="startExerciseButton" href="#square-button-icon" y="50%-50" fill="coral">
+    <set href="#text"  attributeName="text-buffer" to="Start" />
+    <set href="#image" attributeName="href" to="start.png" />
+  </use>
+  </svg>
+  <svg id="exerciseInterface">
+    <text id="distance" x="0%" y="10%" class="distancePlaceholder">Distanz:</text>
+    <text id="distanceValue" x="50%" y="10%" class="distanceValue"></text>
+    <text id="speed" x="0%" y="25%" class="speedPlaceholder">Geschwindigkeit:</text>
+    <text id="speedValue" x="80%" y="25%" class="speedValue"></text>
+    <text id="pace" x="0%" y="40%" class="pacePlaceholder">Tempo:</text>
+    <text id="paceValue" x="50%" y="40%" class="paceValue"></text>
+    <text id="heartbeat" x="0%" y="55%" class="heartbeatPlaceholder">Herzschlag:</text>
+    <text id="heartbeatValue" x="70%" y="55%" class="heartbeatValue"></text>
+    <text id="activeTime" x="0%" y="70%" class="activeTimePlaceholder">Aktiv:</text>
+    <text id="activeValue" x="50%" y="70%" class="activeValue"></text>
+    <text id="calories" x="0%" y="85%" class="caloriesPlaceHolder">Kalorien:</text>
+    <text id="caloriesValue" x="50%" y="85%" class="caloriesValue"></text>
+  </svg>
+</svg>
