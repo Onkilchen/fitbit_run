@@ -2,41 +2,68 @@
   <rect id="background" />
   <svg id="startButton">
     <use id="startExerciseButton" href="#square-button-icon" y="50%-50" fill="coral">
-    <set href="#text"  attributeName="text-buffer" to="Start" />
-    <set href="#image" attributeName="href" to="start.png" />
-  </use>
+      <set href="#text"  attributeName="text-buffer" to="Start" />
+      <set href="#text" attributeName="text-anchor" to="middle" />
+      <!-- <set href="#image" attributeName="href" to="start.png" /> -->
+    </use>
   </svg>
+
+  <svg id="myPopup" display="none">
+
+     <!-- Title and text -->
+    <use href="#mixed-text-center-mid" class="dialog-mixed-text" fill="fb-white">
+      <set href="#top-padding" attributeName="display" to="none" />
+      <set href="#header/text" attributeName="text-buffer" to="Weiter oder Stop" />
+      <set href="#header/text" attributeName="fill" to="fb-magenta"/>
+      <set href="#copy/text" attributeName="text-buffer" to="Möchtest du weitermachen oder den Lauf beenden?" />
+      <set href="#bottom-padding" attributeName="display" to="none" />
+    </use>
+
+      <use id="stopExerciseButton" class="dialog-half-button-left" href="#square-button-negative">
+        <set href="#text"  attributeName="text-buffer" to="Stop" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+      </use>
+    
+
+      <use id="resumeExerciseButton" class="dialog-half-button-right" href="#square-button-neutral">
+        <set href="#text"  attributeName="text-buffer" to="Weiter" />
+        <set href="#text" attributeName="text-anchor" to="middle" />
+      </use>
+    
+  </svg>
+
   <svg id="exerciseInterface">
     <use id="stats-cycle" href="#cycleview">
       <use href="#cycleview-item" class="cycle-item">
-        <text id="distance" x="100%-60">Distanz:</text>
+        <text id="distance" x="100%-150">Distanz:</text>
         <text id="distanceValue" class="distanceValue"></text>
       </use>
 
       <use href="#cycleview-item" class="cycle-item">
-        <text id="speed" x="100%-60">Geschwindigkeit:</text>
+        <text id="speed" x="100%-150">Geschw.:</text>
         <text id="speedValue" class="speedValue"></text>
       </use>
 
       <use href="#cycleview-item" class="cycle-item">
-        <text id="pace" x="100%-60">Tempo:</text>
+        <text id="pace" x="100%-150">Pace:</text>
         <text id="paceValue" class="paceValue"></text>
       </use>
 
       <use href="#cycleview-item" class="cycle-item">
-        <text id="heartbeat" x="100%-80">Herzschlag:</text>
+        <text id="heartbeat" x="100%-150">Herz:</text>
         <text id="heartbeatValue" class="heartbeatValue"></text>
       </use>
 
       <use href="#cycleview-item" class="cycle-item">
-        <text id="activeTime" x="100%-60">Aktiv:</text>
+        <text id="activeTime" x="100%-150">Aktiv:</text>
         <text id="activeValue" class="activeValue"></text>
       </use>
 
       <use href="#cycleview-item" class="cycle-item">
-        <text id="calories" x="100%-60">Kalorien:</text>
+        <text id="calories" x="100%-150">Kalorien:</text>
         <text id="caloriesValue" class="caloriesValue"></text>
       </use>
     </use>
   </svg>
+  
 </svg>

@@ -4,11 +4,22 @@ import { geolocation } from 'geolocation'
 
 // parent svg of exercise_interface
 let exerciseInterface = document.getElementById('exerciseInterface')
+// hide the texts
+exerciseInterface.style.visibility = 'hidden'
+
+// show modal
+let myPopup = document.getElementById('myPopup')
+myPopup.style.display = 'none'
+
+// stop button
+let stopExerciseButton = document.getElementById('stopExerciseButton')
+
+// resume button
+let resumeExerciseButton = document.getElementById('resumeExerciseButton')
+
 // start button
 let startButton = document.getElementById('startButton')
 let startExerciseButton = document.getElementById('startExerciseButton')
-// get style element for changing the background
-let backgroundColor = document.getElementById('background')
 
 // labels living in the child document of the exercise_interface(frontend)
 let distanceLabel = document.getElementById('distance')
@@ -24,6 +35,7 @@ let activeValue = document.getElementById('activeValue')
 let caloriesLabel = document.getElementById('calories')
 let caloriesValue = document.getElementById('caloriesValue')
 
+// timer for the update
 let timer = undefined
 
 let update = () => {
@@ -33,55 +45,80 @@ let update = () => {
     }
 
     // Distance travelled, in meters
-    distanceValue.text = `${exercise.stats.distance}`
+    distanceValue.text = `${exercise.stats.distance} m`
     // Speed, in m/s
-    speedValue.text = `${exercise.stats.speed.current}`
+    speedValue.text = `${exercise.stats.speed.current} m/s`
     // Pace, in seconds per kilometer
-    paceValue.text = `${exercise.stats.pace.current}`
+    paceValue.text = `${exercise.stats.pace.current} s/km`
     // Heart rate, in beats per minute
-    heartbeatValue.text = `${exercise.stats.heartRate.current}`
+    heartbeatValue.text = `${exercise.stats.heartRate.current} b/m`
     // Time spent in the "started" state, in milliseconds
-    activeValue.text = `${exercise.stats.activeTime}` + `ms`
+    activeValue.text = `${((exercise.stats.activeTime % 60000) / 1000).toFixed(
+        0
+    )} s`
     // Number of calories burned, in calories (kcal)
-    caloriesValue.text = `${exercise.stats.calories}`
+    caloriesValue.text = `${exercise.stats.calories} kcal`
 }
-
-// hide the texts
-exerciseInterface.style.visibility = 'hidden'
 
 startExerciseButton.onactivate = function(event) {
     // hide the button
     startButton.style.visibility = 'hidden'
+
     // show the stats
     exerciseInterface.style.visibility = 'visible'
-    // change background color to lightblue
-    backgroundColor.style.fill = 'lightyellow'
 
     // actually start the exercise
     exercise.start('run', { gps: true, autopause: true })
     console.log('Exercise started!')
 }
 
+stopExerciseButton.onclick = function(event) {
+    // hide the modal
+    myPopup.style.display = 'none'
+    // show start button
+    startButton.style.visibility = 'visible'
+    // hide the stats
+    exerciseInterface.style.visibility = 'hidden'
+
+    // stop the exercise
+    exercise.stop()
+}
+
+resumeExerciseButton.onclick = function(event) {
+    // resume the exercise
+    exercise.resume()
+    // hide the modal
+    myPopup.style.display = 'none'
+}
+
 geolocation.watchPosition(position => {
-    console.log(position)
+    console.log(position.longitude, position.latitude)
 })
 
 exercise.onstatechange = () => {
     console.log('Exercise changed state')
 
-    if (exercise.state !== "started") {
+    if (exercise.state === 'paused') {
+        exerciseInterface.style.visibility = 'hidden'
+        myPopup.style.display = 'inline'
+    }
+
+    if (exercise.state === 'started') {
+        exerciseInterface.style.visibility = 'visible'
+    }
+
+    if (exercise.state !== 'started') {
         // we're not supposed to consume anything right now,
         // make sure, we aren't
-	if (typeof timer !== "undefined") {
-	    clearInterval(timer)
-	    timer = undefined
+        if (typeof timer !== 'undefined') {
+            clearInterval(timer)
+            timer = undefined
         }
         return
     }
 
     // run, Forrest, run!
-    if (typeof timer === "undefined") {
+    if (typeof timer === 'undefined') {
         timer = setInterval(update, 100)
     }
 }
-
