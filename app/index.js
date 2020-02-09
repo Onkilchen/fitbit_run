@@ -68,7 +68,7 @@ let update = () => {
 }
 
 /**
- * Checks if the 'start' button has been activated and starts the 'run' exercise plus activates grps tracking.
+ * Checks if the 'start' button has been activated and starts the 'run' exercise plus activates gps tracking.
  * Should the user not run anymore, autopause is activated automatically.
  *
  * @function startExerciseButton

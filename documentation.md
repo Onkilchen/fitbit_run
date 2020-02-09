@@ -34,7 +34,7 @@ We assign the values to the specific text attributes of each stat.
 <a name="startExerciseButton"></a>
 
 ## startExerciseButton()
-Checks if the 'start' button has been activated and starts the 'run' exercise plus activates grps tracking.
+Checks if the 'start' button has been activated and starts the 'run' exercise plus activates gps tracking.
 Should the user not run anymore, autopause is activated automatically.
 
 **Kind**: global function  
