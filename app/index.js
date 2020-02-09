@@ -38,6 +38,10 @@ let caloriesValue = document.getElementById('caloriesValue')
 // timer for the update
 let timer = undefined
 
+/**
+ * In order to update the value of a stat, for instance distance, we need to update that value every couple milliseconds.
+ * We assign the values to the specific text attributes of each stat.
+ */
 let update = () => {
     // check if state it on started and watch the position via gps
     if (exercise.state !== 'started') {
@@ -60,6 +64,10 @@ let update = () => {
     caloriesValue.text = `${exercise.stats.calories} kcal`
 }
 
+/**
+ * Checks if the 'start' button has been activated and starts the 'run' exercise plus activates grps tracking.
+ * Should the user not run anymore, autopause is activated automatically.
+ */
 startExerciseButton.onactivate = function(event) {
     // hide the button
     startButton.style.visibility = 'hidden'
@@ -72,6 +80,9 @@ startExerciseButton.onactivate = function(event) {
     console.log('Exercise started!')
 }
 
+/**
+ * Stops the running exercise and goes back to the main screen
+ */
 stopExerciseButton.onclick = function(event) {
     // hide the modal
     myPopup.style.display = 'none'
@@ -84,6 +95,9 @@ stopExerciseButton.onclick = function(event) {
     exercise.stop()
 }
 
+/**
+ * If the runner decides to keep moving, we resume the exercise after a click on this button
+ */
 resumeExerciseButton.onclick = function(event) {
     // resume the exercise
     exercise.resume()
@@ -91,10 +105,17 @@ resumeExerciseButton.onclick = function(event) {
     myPopup.style.display = 'none'
 }
 
+/**
+ * Watches the actual position of the runner while running and provides longitude and latitude for further usage
+ */
 geolocation.watchPosition(position => {
     console.log(position.longitude, position.latitude)
 })
 
+/**
+ *  if the state of our exercise changes, we fire up this function and check in what state we are in.
+ *  depending on the state, we show and hide specific views and buttons
+ */
 exercise.onstatechange = () => {
     console.log('Exercise changed state')
 
@@ -108,8 +129,11 @@ exercise.onstatechange = () => {
     }
 
     if (exercise.state !== 'started') {
-        // we're not supposed to consume anything right now,
-        // make sure, we aren't
+        /**
+         * we're not supposed to consume anything right now,
+         * make sure, we aren't
+         */
+
         if (typeof timer !== 'undefined') {
             clearInterval(timer)
             timer = undefined
@@ -117,7 +141,9 @@ exercise.onstatechange = () => {
         return
     }
 
-    // run, Forrest, run!
+    /**
+     *  set the timer to update the value every 100 ms
+     */
     if (typeof timer === 'undefined') {
         timer = setInterval(update, 100)
     }
