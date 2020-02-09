@@ -5,7 +5,9 @@
     "license": "UNLICENSED",
     "devDependencies": {
         "@fitbit/sdk": "~4.1.0",
-        "@fitbit/sdk-cli": "^1.7.1"
+        "@fitbit/sdk-cli": "^1.7.1",
+        "jsdoc": "^3.6.3",
+        "jsdoc-to-markdown": "^5.0.3"
     },
     "fitbit": {
         "appUUID": "6b327c25-f6fe-47be-bb68-fc475a4b89df",
@@ -27,6 +29,8 @@
     },
     "scripts": {
         "build": "fitbit-build",
-        "debug": "fitbit"
+        "debug": "fitbit",
+        "documentit": "jsdoc -c conf.json app/index.js",
+        "doctomarkdown": "jsdoc2md app/index.js"
     }
 }
